@@ -1,0 +1,2 @@
+# objInspector
+Addon for NVDA
