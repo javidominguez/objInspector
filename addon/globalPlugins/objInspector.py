@@ -196,7 +196,12 @@ class OBJECT():
 		else:
 			description = ""
 		if not name+description:
-			name = _("untagged")
+			if self.obj.value:
+				name = self.obj.value
+				if len(name) > 50:
+					name = "%s..." % name[0:50]
+			else:
+				name = _("untagged")
 		self.caption = role+name+description
 
 	def getAncestry(self):
