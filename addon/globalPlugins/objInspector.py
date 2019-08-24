@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# objInspector version 1.2dev (August 2016)
+# objInspector version 1.2dev (August 2016 - August 2019)
 # Author: Javi Dominguez <fjavids@gmail.com>
 
 # Shows a list of objects in active window
@@ -61,7 +61,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		feedback.start()
 		try:
 			objects = self.scan([obj])
-		except Exception, inst:
+		except Exception as inst:
 			feedback.stop()
 			beep(200, 100)
 			ui.message(_("Search failed\n%s %s") % (type(inst), inst.args))
@@ -107,7 +107,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			favoritesFile = file (os.path.join(os.path.dirname(__file__), "favorites.dat"))
 			favorites = pickle.load(favoritesFile)
 			favoritesFile.close()
-		except Exception, inst:
+		except Exception as inst:
 			gui.messageBox(_("Error loading favorites.dat file:\n\n%s\n%s") % (type(inst), inst.args), _("Export failed"), wx.ICON_ERROR)
 			return()
 		dlg = wx.FileDialog(gui.mainFrame,
@@ -126,7 +126,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				pickle.dump(favorites, exportFile)
 				exportFile.close()
 				gui.messageBox(_("Favorites have been saved correctly"), _("Export result"), wx.ICON_INFORMATION)
-			except Exception, inst:
+			except Exception as inst:
 				gui.messageBox(_("File can not be saved in the specified location\n\n%s\n%s") % (type(inst), inst.args), _("Warning"), wx.ICON_ERROR)
 
 	def onImportFavorites(self, event):
@@ -151,7 +151,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				importFile = file(dlg.GetPath())
 				importedFav = pickle.load(importFile)
 				importFile .close()
-			except Exception, inst:
+			except Exception as inst:
 				gui.messageBox(_("Error loading %s\n\n%s\n%s") % (dlg.GetPath(), type(inst), inst.args), _("Import failed"), wx.ICON_ERROR)
 				return()
 			count = 0
@@ -170,7 +170,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				favoritesFile = file (os.path.join(os.path.dirname(__file__), "favorites.dat"), "w")
 				pickle.dump(favorites, favoritesFile)
 				favoritesFile.close()
-			except Exception, inst:
+			except Exception as inst:
 				gui.messageBox(_("Favorites have been loaded but can not be saved on file\n\n%s\n%s") % (type(inst), inst.args), _("Warning"), wx.ICON_ERROR)
 
 	__gestures = {
@@ -530,14 +530,14 @@ class ObjectsListDialog(wx.Dialog):
 			obj = obj.children[x]
 			line = line + " %d %s\n" % (obj.role, obj.windowClassName)
 		line = line + OBJ.getAncestry()
-		return (md5(line).digest())
+		return (md5(line.encode()).digest())
 
 	def saveFavorites(self):
 		try:
 			favoritesFile = file (os.path.join(os.path.dirname(__file__), "favorites.dat"), "w")
 			pickle.dump(self.favorites, favoritesFile, 2)
 			favoritesFile.close()
-		except Exception, inst:
+		except Exception as inst:
 			gui.messageBox(_("Can not save favorites file.\n\n%s\n%s") % (type(inst), inst.args), _("Warning"), wx.ICON_ERROR)
 
 	def markFavorites(self):
