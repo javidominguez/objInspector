@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-# objInspector version 1.2dev (August 2016 - August 2019)
+# objInspector version 1.3dev (August 2016 - May 2021)
 # Author: Javi Dominguez <fjavids@gmail.com>
 
 # Shows a list of objects in active window
