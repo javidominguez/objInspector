@@ -8,6 +8,14 @@
 import globalPluginHandler
 import api
 import controlTypes
+# controlTypes module compatibility with old versions of NVDA
+if not hasattr(controlTypes, "Role"):
+	setattr(controlTypes, "Role", type('Enum', (), dict(
+	[(x.split("ROLE_")[1], getattr(controlTypes, x)) for x in dir(controlTypes) if x.startswith("ROLE_")])))
+	setattr(controlTypes, "State", type('Enum', (), dict(
+	[(x.split("STATE_")[1], getattr(controlTypes, x)) for x in dir(controlTypes) if x.startswith("STATE_")])))
+	setattr(controlTypes, "role", type("role", (), {"_roleLabels": controlTypes.roleLabels}))
+# End of compatibility fixes
 import ui
 import winUser
 import gui
@@ -51,7 +59,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def script_scanObjects(self, gesture):
 		obj = api.getForegroundObject()
 		# Limitations: not available in NVDA dialogs nor secure windows
-		if (obj.appModule.productName == "NVDA" and obj.role == controlTypes.ROLE_DIALOG) or globalVars.appArgs.secure == True:
+		if (obj.appModule.productName == "NVDA" and obj.role == controlTypes.Role.DIALOG) or globalVars.appArgs.secure == True:
 			beep(300, 100)
 			ui.message(_("Not available  here"))
 			return()
@@ -77,10 +85,10 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		index = 0
 		children = []
 		patern = objects[-1]
-		if patern.obj.role != controlTypes.ROLE_DOCUMENT:
+		if patern.obj.role != controlTypes.Role.DOCUMENT:
 			for child in patern.obj.children:
 				# Consider only objects that are visible on screen
-				if child.location and child.location != (0, 0, 0, 0) and controlTypes.STATE_INVISIBLE not in child.states:
+				if child.location and child.location != (0, 0, 0, 0) and controlTypes.State.INVISIBLE not in child.states:
 					children.append(OBJECT(child, [index]))
 				index = index+1
 		for child in children:
@@ -183,7 +191,7 @@ class OBJECT():
 		self.obj = obj
 		self.favorite = False
 		# Compose the caption of the object: roleLabel+name+description
-		role = "%s, " % controlTypes.roleLabels[self.obj.role]
+		role = "%s, " % controlTypes.role._roleLabels[self.obj.role]
 		if self.obj.name == None:
 			name = ""
 		else:
@@ -547,42 +555,42 @@ class ObjectsListDialog(wx.Dialog):
 
 roleCategories = [None,
 # Interactive objects
-[controlTypes.ROLE_BUTTON,
-controlTypes.ROLE_CHECKBOX,
-controlTypes.ROLE_CHECKMENUITEM,
-controlTypes.ROLE_COLORCHOOSER,
-controlTypes.ROLE_COMBOBOX,
-controlTypes.ROLE_EDITABLETEXT,
-controlTypes.ROLE_MENU,
-controlTypes.ROLE_MENUBUTTON,
-controlTypes.ROLE_MENUITEM,
-controlTypes.ROLE_PASSWORDEDIT,
-controlTypes.ROLE_RADIOBUTTON,
-controlTypes.ROLE_RADIOMENUITEM,
-controlTypes.ROLE_SPINBUTTON,
-controlTypes.ROLE_TOGGLEBUTTON],
+[controlTypes.Role.BUTTON,
+controlTypes.Role.CHECKBOX,
+controlTypes.Role.CHECKMENUITEM,
+controlTypes.Role.COLORCHOOSER,
+controlTypes.Role.COMBOBOX,
+controlTypes.Role.EDITABLETEXT,
+controlTypes.Role.MENU,
+controlTypes.Role.MENUBUTTON,
+controlTypes.Role.MENUITEM,
+controlTypes.Role.PASSWORDEDIT,
+controlTypes.Role.RADIOBUTTON,
+controlTypes.Role.RADIOMENUITEM,
+controlTypes.Role.SPINBUTTON,
+controlTypes.Role.TOGGLEBUTTON],
 # Data objects
-[controlTypes.ROLE_DATAITEM,
-controlTypes.ROLE_DOCUMENT,
-controlTypes.ROLE_LISTITEM,
-controlTypes.ROLE_TREEVIEWITEM,
-controlTypes.ROLE_RICHEDIT],
+[controlTypes.Role.DATAITEM,
+controlTypes.Role.DOCUMENT,
+controlTypes.Role.LISTITEM,
+controlTypes.Role.TREEVIEWITEM,
+controlTypes.Role.RICHEDIT],
 # Static objects
-[controlTypes.ROLE_GRAPHIC,
-controlTypes.ROLE_ICON,
-controlTypes.ROLE_LABEL,
-controlTypes.ROLE_STATICTEXT,
-controlTypes.ROLE_STATUSBAR],
+[controlTypes.Role.GRAPHIC,
+controlTypes.Role.ICON,
+controlTypes.Role.LABEL,
+controlTypes.Role.STATICTEXT,
+controlTypes.Role.STATUSBAR],
 # Container objects
-[controlTypes.ROLE_APPLICATION,
-controlTypes.ROLE_DESKTOPPANE,
-controlTypes.ROLE_DIALOG,
-controlTypes.ROLE_DIRECTORYPANE,
-controlTypes.ROLE_FRAME,
-controlTypes.ROLE_GLASSPANE,
-controlTypes.ROLE_MENUBAR,
-controlTypes.ROLE_OPTIONPANE,
-controlTypes.ROLE_PANE,
-controlTypes.ROLE_PANEL,
-controlTypes.ROLE_TOOLBAR,
-controlTypes.ROLE_WINDOW]]
+[controlTypes.Role.APPLICATION,
+controlTypes.Role.DESKTOPPANE,
+controlTypes.Role.DIALOG,
+controlTypes.Role.DIRECTORYPANE,
+controlTypes.Role.FRAME,
+controlTypes.Role.GLASSPANE,
+controlTypes.Role.MENUBAR,
+controlTypes.Role.OPTIONPANE,
+controlTypes.Role.PANE,
+controlTypes.Role.PANEL,
+controlTypes.Role.TOOLBAR,
+controlTypes.Role.WINDOW]]
