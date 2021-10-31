@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 20:44+0200\n"
-"PO-Revision-Date: 2016-08-15 20:50+0200\n"
+"Report-Msgid-Bugs-To: nvda-translations@groups.io\n"
+"POT-Creation-Date: 2021-10-31 18:18+0100\n"
+"PO-Revision-Date: 2021-10-31 18:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -17,31 +17,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.8\n"
 
-#: objinspector.py:42
+#: addon\globalPlugins\objInspector\__init__.py:57
 msgid "obj&Inspector"
-msgstr "obj&Inspector"
+msgstr "Inspector de ob&jetos"
 
-#: objinspector.py:43
+#: addon\globalPlugins\objInspector\__init__.py:58
 msgid "Manage favorites of objInspector"
 msgstr "Gestionar favoritos de objInspector"
 
-#: objinspector.py:45
+#: addon\globalPlugins\objInspector\__init__.py:60
 msgid "Export favorites"
 msgstr "Exportar favoritos"
 
-#: objinspector.py:48
+#: addon\globalPlugins\objInspector\__init__.py:63
 msgid "Import favorites"
 msgstr "Importar favoritos"
 
-#: objinspector.py:56
+#: addon\globalPlugins\objInspector\__init__.py:66
+msgid "Settings"
+msgstr "Ajustes"
+
+#: addon\globalPlugins\objInspector\__init__.py:74
 msgid "Not available  here"
 msgstr "No disponible aquí"
 
-#: objinspector.py:59 objinspector.py:217
+#: addon\globalPlugins\objInspector\__init__.py:77
+#: addon\globalPlugins\objInspector\__init__.py:247
 msgid "Searching..."
 msgstr "Buscando..."
 
-#: objinspector.py:67
+#: addon\globalPlugins\objInspector\__init__.py:85
 #, python-format
 msgid ""
 "Search failed\n"
@@ -50,21 +55,22 @@ msgstr ""
 "Falló la búsqueda\n"
 "%s %s"
 
-#: objinspector.py:70
+#: addon\globalPlugins\objInspector\__init__.py:88
 #, python-format
 msgid "Objects in %s window"
 msgstr "Objetos en la ventana de %s"
 
-#: objinspector.py:71
+#: addon\globalPlugins\objInspector\__init__.py:89
 #, python-format
 msgid "%d items"
 msgstr "%d elementos"
 
-#: objinspector.py:74
+#. Translators: Message presented in input help mode.
+#: addon\globalPlugins\objInspector\__init__.py:92
 msgid "Shows a list of objects in the active window"
 msgstr "Muestra una lista con los objetos en la ventana activa"
 
-#: objinspector.py:111
+#: addon\globalPlugins\objInspector\__init__.py:136
 #, python-format
 msgid ""
 "Error loading favorites.dat file:\n"
@@ -77,32 +83,34 @@ msgstr ""
 "%s\n"
 "%s"
 
-#: objinspector.py:111
+#: addon\globalPlugins\objInspector\__init__.py:136
 msgid "Export failed"
 msgstr "Falló la exportación"
 
-#: objinspector.py:114
+#: addon\globalPlugins\objInspector\__init__.py:139
 msgid "Select a file for copying your favorites"
 msgstr "Selecciona un archivo donde copiar tus favoritos"
 
-#: objinspector.py:122
+#: addon\globalPlugins\objInspector\__init__.py:147
 msgid "The file already exists. do you want to replace it?"
 msgstr "El archivo ya existe. ¿Quieres reemplazarlo?"
 
-#: objinspector.py:122 objinspector.py:130 objinspector.py:174
-#: objinspector.py:536
+#: addon\globalPlugins\objInspector\__init__.py:147
+#: addon\globalPlugins\objInspector\__init__.py:155
+#: addon\globalPlugins\objInspector\__init__.py:199
+#: addon\globalPlugins\objInspector\__init__.py:566
 msgid "Warning"
 msgstr "Atención"
 
-#: objinspector.py:128
+#: addon\globalPlugins\objInspector\__init__.py:153
 msgid "Favorites have been saved correctly"
 msgstr "Los favoritos se han guardado correctamente"
 
-#: objinspector.py:128
+#: addon\globalPlugins\objInspector\__init__.py:153
 msgid "Export result"
 msgstr "Resultado de la exportación"
 
-#: objinspector.py:130
+#: addon\globalPlugins\objInspector\__init__.py:155
 #, python-format
 msgid ""
 "File can not be saved in the specified location\n"
@@ -115,11 +123,11 @@ msgstr ""
 "%s\n"
 "%s"
 
-#: objinspector.py:143
+#: addon\globalPlugins\objInspector\__init__.py:168
 msgid "Select your favorites file"
 msgstr "Selecciona tu archivo de favoritos"
 
-#: objinspector.py:155
+#: addon\globalPlugins\objInspector\__init__.py:180
 #, python-format
 msgid ""
 "Error loading %s\n"
@@ -132,24 +140,25 @@ msgstr ""
 "%s\n"
 "%s"
 
-#: objinspector.py:155
+#: addon\globalPlugins\objInspector\__init__.py:180
 msgid "Import failed"
 msgstr "Falló la importación"
 
-#: objinspector.py:165
+#: addon\globalPlugins\objInspector\__init__.py:190
 msgid "There are No new favorites to add"
 msgstr "No hay favoritos nuevos que añadir"
 
-#: objinspector.py:165 objinspector.py:168
+#: addon\globalPlugins\objInspector\__init__.py:190
+#: addon\globalPlugins\objInspector\__init__.py:193
 msgid "Import result"
 msgstr "Resultado de la importación"
 
-#: objinspector.py:167
+#: addon\globalPlugins\objInspector\__init__.py:192
 #, python-format
 msgid "%d favorites added, %d total"
 msgstr "%d favoritos añadidos, %d totales"
 
-#: objinspector.py:174
+#: addon\globalPlugins\objInspector\__init__.py:199
 #, python-format
 msgid ""
 "Favorites have been loaded but can not be saved on file\n"
@@ -162,123 +171,124 @@ msgstr ""
 "%s\n"
 "%s"
 
-#: objinspector.py:199
+#: addon\globalPlugins\objInspector\__init__.py:229
 msgid "untagged"
 msgstr "sin etiquetar"
 
-#: objinspector.py:238
+#: addon\globalPlugins\objInspector\__init__.py:268
 msgid "P&ython code"
 msgstr "Código P&ython"
 
-#: objinspector.py:246
+#: addon\globalPlugins\objInspector\__init__.py:276
 msgid "&Filter"
 msgstr "&Filtro"
 
-#: objinspector.py:248
+#: addon\globalPlugins\objInspector\__init__.py:278
 msgid "All objects"
 msgstr "Todos los objetos"
 
-#: objinspector.py:248
+#: addon\globalPlugins\objInspector\__init__.py:278
 msgid "Interactive objects"
 msgstr "Objetos interactivos"
 
-#: objinspector.py:248
+#: addon\globalPlugins\objInspector\__init__.py:278
 msgid "Data objects"
 msgstr "Objetos que muestran datos"
 
-#: objinspector.py:248
+#: addon\globalPlugins\objInspector\__init__.py:278
 msgid "Static objects"
 msgstr "Objetos estáticos"
 
-#: objinspector.py:248
+#: addon\globalPlugins\objInspector\__init__.py:278
 msgid "Container objects"
 msgstr "Objetos contenedores"
 
-#: objinspector.py:251
+#: addon\globalPlugins\objInspector\__init__.py:281
 msgid "&Search:"
 msgstr "&Buscar:"
 
-#: objinspector.py:255
+#: addon\globalPlugins\objInspector\__init__.py:285
 msgid "Hide untagged"
 msgstr "&Ocultar los no etiquetados"
 
-#: objinspector.py:257
+#: addon\globalPlugins\objInspector\__init__.py:287
 msgid "Favo&rited objects"
 msgstr "Objetos favo&ritos"
 
-#: objinspector.py:260
+#: addon\globalPlugins\objInspector\__init__.py:290
 msgid "Ascendan&ts"
 msgstr "Ascendien&tes"
 
-#: objinspector.py:263
+#: addon\globalPlugins\objInspector\__init__.py:293
 msgid "&Brothers"
 msgstr "&Hermanos"
 
-#: objinspector.py:266
+#: addon\globalPlugins\objInspector\__init__.py:296
 msgid "C&hildren"
 msgstr "Hi&jos"
 
-#: objinspector.py:271
+#: addon\globalPlugins\objInspector\__init__.py:301
 msgid "&Clear filterss"
 msgstr "&Limpiar filtros"
 
-#: objinspector.py:289
+#: addon\globalPlugins\objInspector\__init__.py:319
 msgid "Default &action"
 msgstr "&Acción por defecto"
 
-#: objinspector.py:292
+#: addon\globalPlugins\objInspector\__init__.py:322
 msgid "&Left Click"
 msgstr "Clic &izquierdo"
 
-#: objinspector.py:295
+#: addon\globalPlugins\objInspector\__init__.py:325
 msgid "&Right Click"
 msgstr "Clic &Derecho"
 
-#: objinspector.py:298
+#: addon\globalPlugins\objInspector\__init__.py:328
 msgid "&NVDA"
 msgstr "&NVDA"
 
-#: objinspector.py:301
+#: addon\globalPlugins\objInspector\__init__.py:331
 msgid "Fa&v"
 msgstr "Fa&v"
 
-#: objinspector.py:305
+#: addon\globalPlugins\objInspector\__init__.py:335
 msgid "Close"
 msgstr "&Cerrar"
 
-#: objinspector.py:329
+#: addon\globalPlugins\objInspector\__init__.py:359
 msgid "Can not do default action for this object"
 msgstr "No se puede hacer la acción por defecto para este objeto"
 
-#: objinspector.py:353
+#: addon\globalPlugins\objInspector\__init__.py:383
 msgid "Unfavorited"
 msgstr "Quitado de favoritos"
 
-#: objinspector.py:357
+#: addon\globalPlugins\objInspector\__init__.py:387
 msgid "Favorited"
 msgstr "Marcado como favorito"
 
-#: objinspector.py:378 objinspector.py:396
+#: addon\globalPlugins\objInspector\__init__.py:408
+#: addon\globalPlugins\objInspector\__init__.py:426
 msgid "items"
 msgstr "elementos"
 
-#: objinspector.py:380
+#: addon\globalPlugins\objInspector\__init__.py:410
 msgid "[filter active]"
 msgstr "[filtro activo]"
 
-#: objinspector.py:386
+#: addon\globalPlugins\objInspector\__init__.py:416
 msgid "ascendants of"
 msgstr "ascendientes de"
 
-#: objinspector.py:389
+#: addon\globalPlugins\objInspector\__init__.py:419
 msgid "brothers of"
 msgstr "hermanos de"
 
-#: objinspector.py:392
+#: addon\globalPlugins\objInspector\__init__.py:422
 msgid "children of"
 msgstr "hijos de"
 
-#: objinspector.py:536
+#: addon\globalPlugins\objInspector\__init__.py:566
 #, python-format
 msgid ""
 "Can not save favorites file.\n"
@@ -290,6 +300,26 @@ msgstr ""
 "\n"
 "%s\n"
 "%s"
+
+#: addon\globalPlugins\objInspector\__init__.py:619
+msgid "Objects inspector settings"
+msgstr "Ajustes del inspector de objetos"
+
+#: addon\globalPlugins\objInspector\__init__.py:623
+msgid "Drill down into documents"
+msgstr "Profundizar en documentos"
+
+#. Add-on summary, usually the user visible name of the addon.
+#. Translators: Summary for this add-on to be shown on installation and add-on information.
+#: buildVars.py:17
+msgid "objInspector"
+msgstr "inspector de objetos"
+
+#. Add-on description
+#. Translators: Long description to be shown for this add-on on add-on information from add-ons manager
+#: buildVars.py:20
+msgid "Show a list of objects in active window"
+msgstr "Muestra una lista de los objetos en la ventana activa"
 
 #~ msgid "Favorites file not found"
 #~ msgstr "Archivo de favoritos no encontrado"

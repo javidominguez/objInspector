@@ -19,7 +19,7 @@ addon_info = {
 	# Translators: Long description to be shown for this add-on on add-on information from add-ons manager
 	"addon_description" : _("Show a list of objects in active window"),
 	# version
-	"addon_version" : "1.4dev",
+	"addon_version" : "1.5dev",
 	# Author(s)
 	"addon_author" : u"Javi Dominguez <fjavids@gmail.com>",
 	# URL for the add-on documentation support
@@ -39,7 +39,7 @@ import os.path
 
 # Define the python files that are the sources of your add-on.
 # You can use glob expressions here, they will be expanded.
-pythonSources = [os.path.join("addon", "appModules", "*.py"),]
+pythonSources = [os.path.join("addon", "globalPlugins", "objInspector", "*.py"),]
 
 # Files that contain strings for translation. Usually your python sources
 i18nSources = pythonSources + ["buildVars.py"]

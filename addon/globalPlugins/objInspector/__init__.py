@@ -33,6 +33,12 @@ try:
 	import cPickle as pickle
 except ImportError:
 	import pickle
+import config
+
+confspec = {
+	"documents":"boolean(default=False)"
+}
+config.conf.spec["objInspector"]=confspec
 
 addonHandler.initTranslation()
 
@@ -43,6 +49,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def __init__(self):
 		super(GlobalPlugin, self).__init__()
 		self._objectsListDialog = None
+		self.settingsDialog = SettingsDialog(gui.mainFrame)
 		# Set preferences menu
 		self.menu = gui.mainFrame.sysTrayIcon.preferencesMenu
 		self.BSMenu = wx.Menu()
@@ -55,6 +62,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		self.importItem = self.BSMenu.Append(wx.ID_ANY,
 		_("Import favorites"), "")
 		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self.onImportFavorites, self.importItem)
+		self.settingsItem = self.BSMenu.Append(wx.ID_ANY,
+		_("Settings"), "")
+		gui.mainFrame.sysTrayIcon.Bind(wx.EVT_MENU, self.onSettings, self.settingsItem)
 
 	def script_scanObjects(self, gesture):
 		obj = api.getForegroundObject()
@@ -85,7 +95,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		index = 0
 		children = []
 		patern = objects[-1]
-		if patern.obj.role != controlTypes.Role.DOCUMENT:
+		if patern.obj.role != controlTypes.Role.DOCUMENT or config.conf["objInspector"]["documents"]:
 			for child in patern.obj.children:
 				# Consider only objects that are visible on screen
 				if child.location and child.location != (0, 0, 0, 0) and controlTypes.State.INVISIBLE not in child.states:
@@ -109,6 +119,13 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			self._objectsListDialog.Show()
 			self._objectsListDialog.Centre()
 			gui.mainFrame.postPopup()
+
+	def onSettings(self, event):
+		gui.mainFrame.prePopup()
+		self.settingsDialog.Show()
+		self.settingsDialog.Centre()
+		self.settingsDialog.checkboxDocuments.SetFocus()
+		gui.mainFrame.postPopup()
 
 	def onExportFavorites(self, event):
 		try:
@@ -594,3 +611,31 @@ controlTypes.Role.PANE,
 controlTypes.Role.PANEL,
 controlTypes.Role.TOOLBAR,
 controlTypes.Role.WINDOW]]
+
+class SettingsDialog(wx.Dialog):
+	def __init__(self, *args, **kwds):
+		kwds["style"] = kwds.get("style", 0) | wx.DEFAULT_DIALOG_STYLE
+		wx.Dialog.__init__(self, *args, **kwds)
+		self.SetTitle(_("Objects inspector settings"))
+
+		mainSizer = wx.BoxSizer(wx.VERTICAL)
+
+		self.checkboxDocuments = wx.CheckBox(self, wx.ID_ANY, _("Drill down into documents"))
+		self.checkboxDocuments.SetValue(config.conf["objInspector"]["documents"])
+		mainSizer.Add(self.checkboxDocuments, 0, 0, 0)
+
+		btnSizer = wx.StdDialogButtonSizer()
+		mainSizer.Add(btnSizer, 0, wx.ALIGN_RIGHT | wx.ALL, 4)
+		self.button_OK = wx.Button(self, wx.ID_OK, "")
+		self.button_OK.SetDefault()
+		btnSizer.AddButton(self.button_OK)
+		btnSizer.Realize()
+		self.SetSizer(mainSizer)
+		mainSizer.Fit(self)
+		self.SetAffirmativeId(self.button_OK.GetId())
+		self.Layout()
+
+		self.Bind(wx.EVT_CHECKBOX, self.setDocumentChoice, self.checkboxDocuments)
+
+	def setDocumentChoice(self, event):
+		config.conf["objInspector"]["documents"] = self.checkboxDocuments.GetValue()
