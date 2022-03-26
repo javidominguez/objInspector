@@ -129,7 +129,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	def onExportFavorites(self, event):
 		try:
-			favoritesFile = file (os.path.join(os.path.dirname(__file__), "favorites.dat"))
+			favoritesFile = open (os.path.join(os.path.dirname(__file__), "favorites.dat"), "rb")
 			favorites = pickle.load(favoritesFile)
 			favoritesFile.close()
 		except Exception as inst:
@@ -147,7 +147,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				if gui.messageBox(_("The file already exists. do you want to replace it?"), _("Warning"), wx.YES_NO+wx.ICON_QUESTION) == 8:
 					return()
 			try:
-				exportFile = file(dlg.GetPath(), "w")
+				exportFile = open(dlg.GetPath(), "wb")
 				pickle.dump(favorites, exportFile)
 				exportFile.close()
 				gui.messageBox(_("Favorites have been saved correctly"), _("Export result"), wx.ICON_INFORMATION)
@@ -156,7 +156,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	def onImportFavorites(self, event):
 		try:
-			favoritesFile = file (os.path.join(os.path.dirname(__file__), "favorites.dat"))
+			favoritesFile = open (os.path.join(os.path.dirname(__file__), "favorites.dat"), "rb")
 			favorites = pickle.load(favoritesFile)
 			favoritesFile.close()
 		except:
@@ -173,7 +173,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		gui.mainFrame.postPopup()
 		if result == wx.ID_OK:
 			try:
-				importFile = file(dlg.GetPath())
+				importFile = open(dlg.GetPath(), "rb")
 				importedFav = pickle.load(importFile)
 				importFile .close()
 			except Exception as inst:
@@ -192,7 +192,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			resultMessage = _("%d favorites added, %d total") % (count, len(favorites))
 			gui.messageBox(resultMessage, _("Import result"), wx.ICON_INFORMATION)
 			try:
-				favoritesFile = file (os.path.join(os.path.dirname(__file__), "favorites.dat"), "w")
+				favoritesFile = open (os.path.join(os.path.dirname(__file__), "favorites.dat"), "wb")
 				pickle.dump(favorites, favoritesFile)
 				favoritesFile.close()
 			except Exception as inst:
@@ -543,8 +543,10 @@ class ObjectsListDialog(wx.Dialog):
 
 	def loadFavorites(self):
 		try:
-			favoritesFile = file (os.path.join(os.path.dirname(__file__), "favorites.dat"))
+			favoritesFile = open (os.path.join(os.path.dirname(__file__), "favorites.dat"), "rb")
 			self.favorites = pickle.load(favoritesFile)
+			import tones
+			tones.beep(1000,90)
 		except:
 			self.favorites = []
 
@@ -559,7 +561,7 @@ class ObjectsListDialog(wx.Dialog):
 
 	def saveFavorites(self):
 		try:
-			favoritesFile = file (os.path.join(os.path.dirname(__file__), "favorites.dat"), "w")
+			favoritesFile = open (os.path.join(os.path.dirname(__file__), "favorites.dat"), "wb")
 			pickle.dump(self.favorites, favoritesFile, 2)
 			favoritesFile.close()
 		except Exception as inst:
