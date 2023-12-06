@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: nvda-translations@groups.io\n"
-"POT-Creation-Date: 2021-10-31 18:18+0100\n"
-"PO-Revision-Date: 2021-10-31 18:22+0100\n"
+"POT-Creation-Date: 2023-12-06 13:11+0100\n"
+"PO-Revision-Date: 2023-12-06 13:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #: addon\globalPlugins\objInspector\__init__.py:57
 msgid "obj&Inspector"
@@ -98,7 +98,10 @@ msgstr "El archivo ya existe. ¿Quieres reemplazarlo?"
 #: addon\globalPlugins\objInspector\__init__.py:147
 #: addon\globalPlugins\objInspector\__init__.py:155
 #: addon\globalPlugins\objInspector\__init__.py:199
-#: addon\globalPlugins\objInspector\__init__.py:566
+#: addon\globalPlugins\objInspector\__init__.py:588
+#: addon\globalPlugins\objInspector\__init__.py:636
+#: addon\globalPlugins\objInspector\__init__.py:644
+#: addon\globalPlugins\objInspector\__init__.py:655
 msgid "Warning"
 msgstr "Atención"
 
@@ -255,40 +258,44 @@ msgstr "Fa&v"
 msgid "Close"
 msgstr "&Cerrar"
 
-#: addon\globalPlugins\objInspector\__init__.py:359
+#: addon\globalPlugins\objInspector\__init__.py:356
+msgid "Result {} of {}"
+msgstr "Se encuentra en el resultado {} de {}"
+
+#: addon\globalPlugins\objInspector\__init__.py:379
 msgid "Can not do default action for this object"
 msgstr "No se puede hacer la acción por defecto para este objeto"
 
-#: addon\globalPlugins\objInspector\__init__.py:383
+#: addon\globalPlugins\objInspector\__init__.py:403
 msgid "Unfavorited"
 msgstr "Quitado de favoritos"
 
-#: addon\globalPlugins\objInspector\__init__.py:387
+#: addon\globalPlugins\objInspector\__init__.py:407
 msgid "Favorited"
 msgstr "Marcado como favorito"
 
-#: addon\globalPlugins\objInspector\__init__.py:408
-#: addon\globalPlugins\objInspector\__init__.py:426
+#: addon\globalPlugins\objInspector\__init__.py:428
+#: addon\globalPlugins\objInspector\__init__.py:446
 msgid "items"
 msgstr "elementos"
 
-#: addon\globalPlugins\objInspector\__init__.py:410
+#: addon\globalPlugins\objInspector\__init__.py:430
 msgid "[filter active]"
 msgstr "[filtro activo]"
 
-#: addon\globalPlugins\objInspector\__init__.py:416
+#: addon\globalPlugins\objInspector\__init__.py:436
 msgid "ascendants of"
 msgstr "ascendientes de"
 
-#: addon\globalPlugins\objInspector\__init__.py:419
+#: addon\globalPlugins\objInspector\__init__.py:439
 msgid "brothers of"
 msgstr "hermanos de"
 
-#: addon\globalPlugins\objInspector\__init__.py:422
+#: addon\globalPlugins\objInspector\__init__.py:442
 msgid "children of"
 msgstr "hijos de"
 
-#: addon\globalPlugins\objInspector\__init__.py:566
+#: addon\globalPlugins\objInspector\__init__.py:588
 #, python-format
 msgid ""
 "Can not save favorites file.\n"
@@ -301,11 +308,37 @@ msgstr ""
 "%s\n"
 "%s"
 
-#: addon\globalPlugins\objInspector\__init__.py:619
+#: addon\globalPlugins\objInspector\__init__.py:597
+msgid "Jump into position..."
+msgstr "Ir a la posición"
+
+#: addon\globalPlugins\objInspector\__init__.py:603
+msgid "&Enter a number between 1 and {}:"
+msgstr "&Introduzca un número entre 1 y {}"
+
+#: addon\globalPlugins\objInspector\__init__.py:607
+msgid "&Go"
+msgstr "&ir"
+
+#: addon\globalPlugins\objInspector\__init__.py:610
+msgid "Cancel"
+msgstr "&Cancelar"
+
+#: addon\globalPlugins\objInspector\__init__.py:632
+msgid ""
+"The field only accepts numbers and cannot be left empty.\n"
+"\n"
+"Only a number between 1 and {} is allowed."
+msgstr ""
+"El campo solo admite números y no puede quedar vacío.\n"
+"\n"
+"Solo se admite un número comprendido entre 1 y {}."
+
+#: addon\globalPlugins\objInspector\__init__.py:731
 msgid "Objects inspector settings"
 msgstr "Ajustes del inspector de objetos"
 
-#: addon\globalPlugins\objInspector\__init__.py:623
+#: addon\globalPlugins\objInspector\__init__.py:735
 msgid "Drill down into documents"
 msgstr "Profundizar en documentos"
 
@@ -320,6 +353,19 @@ msgstr "inspector de objetos"
 #: buildVars.py:20
 msgid "Show a list of objects in active window"
 msgstr "Muestra una lista de los objetos en la ventana activa"
+
+#: addon\installTasks.py:13
+msgid ""
+"Fail in displayChangelog function on install tasks\n"
+"{}"
+msgstr ""
+"Error en la función displayChangelog en tareas de instalación\n"
+"{}"
+
+#: addon\installTasks.py:46
+#, python-brace-format
+msgid "Whats new in {addonSummary} {addonVersion}"
+msgstr "Novedades en {addonSummary} {addonVersion}"
 
 #~ msgid "Favorites file not found"
 #~ msgstr "Archivo de favoritos no encontrado"

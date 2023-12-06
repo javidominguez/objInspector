@@ -341,11 +341,31 @@ class ObjectsListDialog(wx.Dialog):
 		self.Bind( wx.EVT_BUTTON, self.onRightClickButton, id=rightClickButtonID)
 		self.Bind( wx.EVT_BUTTON, self.onDevInfoButton, id=devInfoButtonID)
 		self.Bind( wx.EVT_BUTTON, self.onFavButton, id=favButtonID)
+		self.Bind(wx.EVT_CHAR_HOOK, self.onKeyEvent)
 		mainSizer.Fit(self)
 		self.SetSizer(mainSizer)
 		self.doActionButton.SetDefault()
 
-# Manage events
+	# Manage events
+	def onKeyEvent(self, event):
+		foco = wx.Window.FindFocus()
+		if isinstance(foco, wx.ListBox):
+			if event.ControlDown() and event.GetKeyCode() == ord('I'): # Control+I announces listbox position information.
+				obj = event.GetEventObject()
+				ui.message(
+				_("Result {} of {}").format(obj.GetSelection()+1, obj.GetCount()) if obj.GetCount() else "No results."
+				)
+			elif event.ControlDown() and event.GetKeyCode() == ord('F'): #Control+F moves focus in listbox to given number
+				obj = event.GetEventObject()
+				total = obj.GetCount()
+				if total > 0:
+					dlg = PositionDialog(total)
+					result = dlg.ShowModal()
+					if result == 0: # Move focus
+						obj.SetSelection(int(dlg.numero.GetValue()) - 1)
+					dlg.Destroy()
+		event.Skip()
+
 	def onListBox(self, event):
 		self.updatePythonText()
 
@@ -571,6 +591,96 @@ class ObjectsListDialog(wx.Dialog):
 		for i in range (0, len(self.objects)):
 			if self.getObjectHash(self.objects[i]) in self.favorites:
 				self.objects[i].favorite = True
+	# Inicio de mis modificaciones
+class PositionDialog(wx.Dialog):
+	def __init__(self, datos):
+		super(PositionDialog, self).__init__(None, -1, title=_("Jump into position..."))
+
+		self.datos = datos
+
+		self.Panel = wx.Panel(self)
+
+		label1 = wx.StaticText(self.Panel, wx.ID_ANY, label=_("&Enter a number between 1 and {}:").format(self.datos))
+		self.numero = wx.TextCtrl(self.Panel, 101, "", style=wx.TE_PROCESS_ENTER)
+		self.numero.Bind(wx.EVT_CONTEXT_MENU, self.onAnular)
+
+		self.AceptarBTN = wx.Button(self.Panel, 0, label=_("&Go"))
+		self.Bind(wx.EVT_BUTTON, self.onAceptar, id=self.AceptarBTN.GetId())
+
+		self.CancelarBTN = wx.Button(self.Panel, 1, label=_("Cancel"))
+		self.Bind(wx.EVT_BUTTON, self.onCancelar, id=self.CancelarBTN.GetId())
+
+		self.Bind(wx.EVT_CHAR_HOOK, self.onkeyVentanaDialogo)
+
+		sizeV = wx.BoxSizer(wx.VERTICAL)
+		sizeH = wx.BoxSizer(wx.HORIZONTAL)
+
+		sizeV.Add(label1, 0, wx.EXPAND)
+		sizeV.Add(self.numero, 0, wx.EXPAND)
+
+		sizeH.Add(self.AceptarBTN, 2, wx.EXPAND)
+		sizeH.Add(self.CancelarBTN, 2, wx.EXPAND)
+
+		sizeV.Add(sizeH, 0, wx.EXPAND)
+
+		self.Panel.SetSizer(sizeV)
+
+		self.Centre()
+
+	def onAceptar(self, event):
+		msg = \
+_("""The field only accepts numbers and cannot be left empty.
+
+Only a number between 1 and {} is allowed.""").format(self.datos)
+		if not self.numero.GetValue():
+			gui.messageBox(msg, _("Warning"), wx.OK| wx.ICON_INFORMATION)
+			self.numero.Clear()
+			self.numero.SetFocus()
+			return
+		else:
+			try:
+				z = 1 <= int(self.numero.GetValue()) <= self.datos
+			except ValueError:
+				gui.messageBox(msg, _("Warning"), wx.OK| wx.ICON_INFORMATION)
+				self.numero.Clear()
+				self.numero.SetFocus()
+				return
+
+			if z:
+				if self.IsModal():
+					self.EndModal(0)
+				else:
+					self.Close()
+			else:
+				gui.messageBox(msg, _("Warning"), wx.OK| wx.ICON_INFORMATION)
+				self.numero.Clear()
+				self.numero.SetFocus()
+				return
+
+	def onkeyVentanaDialogo(self, event):
+		foco = wx.Window.FindFocus().GetId()
+		robot = wx.UIActionSimulator()
+		if event.GetUnicodeKey() == wx.WXK_RETURN:
+			if foco in [101]: # Enter text field
+				self.onAceptar(None)
+
+		elif event.GetKeyCode() == 27: # We press ESC and close the window
+			if self.IsModal():
+				self.EndModal(1)
+			else:
+				self.Close()
+		else:
+			event.Skip()
+
+	def onCancelar(self, event):
+		if self.IsModal():
+			self.EndModal(1)
+		else:
+			self.Close()
+
+	def onAnular(self, event):
+		return
+
 
 roleCategories = [None,
 # Interactive objects

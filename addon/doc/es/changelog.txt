@@ -1,0 +1,5 @@
+Implementadas dos funciones que facilitan moverse en listas de resultados muy grandes:
+
+Congrol+I informa de la posición en la lista del resultado actual,
+
+Congtrol+F salta a la posición especificada.
